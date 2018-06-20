@@ -16,9 +16,9 @@ import { StackNavigator } from 'react-navigation';
 
 import LoginForm from './components/LoginForm.js';
 import RegistrationForm from './components/RegistrationForm.js';
-import ClientCard from './components/ClientCard.js';
-import TabCatalog from './components/Tabs/TabCatalog.js';
-import ClientQRScreen from './components/ClientQRScreen.js';
+// import ClientCard from './components/ClientCard.js';
+// import TabCatalog from './components/Tabs/TabCatalog.js';
+// import ClientQRScreen from './components/ClientQRScreen.js';
 // import TabFavorites from '/media/flake/28E4941CE493E9F8/Web/React Project/Test5/components/Tabs/TabFavorites.js';
 
 
@@ -35,10 +35,10 @@ export default class App extends React.Component {
     return (
         // <RegistrationForm></RegistrationForm>
         // <LoginForm></LoginForm>
-        //<AppNavigator></AppNavigator>
+        <AppNavigator></AppNavigator>
         // <VerifyPhone></VerifyPhone>
-      <ClientCard/>
-	//<ClientQRScreen/>
+      //<ClientCard/>
+	     //<ClientQRScreen/>
 	  // <TabCatalog/>
     );
   }
