@@ -16,11 +16,8 @@ import { StackNavigator } from 'react-navigation';
 
 import LoginForm from './components/LoginForm.js';
 import RegistrationForm from './components/RegistrationForm.js';
-// import ClientCard from './components/ClientCard.js';
-// import TabCatalog from './components/Tabs/TabCatalog.js';
-// import ClientQRScreen from './components/ClientQRScreen.js';
-// import TabFavorites from '/media/flake/28E4941CE493E9F8/Web/React Project/Test5/components/Tabs/TabFavorites.js';
-
+import ClientCard from './components/ClientCard.js';
+import ClientQrScreen from './components/ClientQrScreen.js';
 
 
 // const instructions = Platform.select({
@@ -30,16 +27,14 @@ import RegistrationForm from './components/RegistrationForm.js';
 //     'Shake or press menu button for dev menu',
 // });
 
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
-        // <RegistrationForm></RegistrationForm>
-        // <LoginForm></LoginForm>
-        <AppNavigator></AppNavigator>
-        // <VerifyPhone></VerifyPhone>
+      // <AppNavigator></AppNavigator>
+      // <VerifyPhone></VerifyPhone>
       //<ClientCard/>
-	     //<ClientQRScreen/>
-	  // <TabCatalog/>
+       // <TabCatalog/>
+       <ClientQrScreen/>
     );
   }
 }
@@ -48,7 +43,7 @@ const AppNavigator = StackNavigator({
 
   LoginForm : { screen : LoginForm},
   RegistrationForm : { screen : RegistrationForm},
-  MainCLientScreen : { screen : MainClientScreen },
+  ClientCard : { screen : ClientCard },
 });
 
 const styles = StyleSheet.create({

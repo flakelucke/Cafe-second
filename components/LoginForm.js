@@ -59,7 +59,7 @@ _handlePress = async (login,password) => {
 }).then((response)=>response.json())
 .then((responseJson) => {
     if (responseJson["auth"])
-    this.props.navigation.navigate('MainCLientScreen');
+    this.props.navigation.navigate('ClientCard');
     else 
     alert('Проверьте введенные данные');
 })
