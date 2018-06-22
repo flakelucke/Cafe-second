@@ -63,7 +63,7 @@ export default class ScreenActionInfo extends Component {
     <ScrollView style = {{backgroundColor: '#FFF', }}>
       <View style = {styles.header}>
         <View style ={{justifyContent: 'center',}}>
-          <TouchableOpacity onPress={() => this._handlePressHome()} >
+          <TouchableOpacity onPress={() => this._handlePressHome()}>
             <Image style={styles.home} source={require('../img/home.png')}/>
           </TouchableOpacity>
         </View>

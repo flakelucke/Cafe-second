@@ -1,6 +1,5 @@
 
 import React, { Component } from "react";
-// import { List } from "native-base";
 import { List, ListItem, SearchBar } from "react-native-elements";
 import {
     View,
@@ -13,9 +12,10 @@ import {
     Alert,
     TouchableOpacity,
     AsyncStorage,
-    TextInput
+    TextInput,
+    ActivityIndicator,
 } from 'react-native';
-
+import { Spinner,} from 'native-base';
 export default class TabCatalog extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +27,7 @@ export default class TabCatalog extends Component {
       seed: 1,
       error: null,
       refreshing: false,
+      loadspin: true,
     };
   }
 
@@ -38,7 +39,8 @@ export default class TabCatalog extends Component {
     const { page, seed } = this.state;
     const url = `https://api-for-cafe.herokuapp.com/cafe/`;
     this.setState({ loading: true });
-    fetch(url)
+    //Можно через SetTimeout
+      fetch(url)
       .then(res => res.json())
       .then(res => {
         this.setState({
@@ -46,6 +48,7 @@ export default class TabCatalog extends Component {
           error: res.error || null,
           loading: false,
           refreshing: false,
+          loadspin: false
         });
       })
       .catch(error => {
@@ -58,7 +61,7 @@ export default class TabCatalog extends Component {
       {
         page: 1,
         seed: this.state.seed + 1,
-        refreshing: true
+        refreshing: true,
       },
       () => {
         this.makeRemoteRequest();
@@ -84,17 +87,23 @@ export default class TabCatalog extends Component {
           height: 1,
           width: "86%",
           backgroundColor: "#CED0CE",
-          marginLeft: "14%"
+          marginLeft: "14%",
         }}
       />
     );
   };
 
   renderHeader = () => {
-    return <SearchBar placeholder="Поиск"
-    containerStyle={{ backgroundColor: "#ffffff",borderTopWidth: 0, height: 50}}
-    inputStyle={{backgroundColor: "#ffffff",fontSize : 16,}}
-    icon={{ type: 'font-awesome', name: 'search' }}/>;
+    return <View>
+    <SearchBar placeholder="Поиск"
+      containerStyle={{ backgroundColor: "#ffffff",borderTopWidth: 0, height: 50}}
+      inputStyle={{backgroundColor: "#ffffff",fontSize : 16,}}
+      icon={{ type: 'font-awesome', name: 'search' }}/>
+      {this.state.loadspin && (
+      <ActivityIndicator animating size="large" />
+      )}
+    </View>
+    ;
   };
 
   renderFooter = () => {
@@ -108,7 +117,7 @@ export default class TabCatalog extends Component {
           borderColor: "#CED0CE"
         }}
       >
-        <ActivityIndicator animating size="large" />
+        <ActivityIndicator animating size="large" hidesWhenStopped={this.state.loading} />
       </View>
     );
   };
@@ -117,24 +126,26 @@ export default class TabCatalog extends Component {
     return (
       <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0,marginTop: 0}} >
         <FlatList
-          data1={this.state.data1}
+          data={this.state.data1}
           renderItem={({ item }) => (
             <ListItem
-              title={`${item.key}`}
-              subtitle={item.key}
+              onPress={() => this._handlePress()}
+              title={`${item.adress} ${item.description}`}
+              subtitle={item.name}
               avatar={{ uri: item.pictureURL}}
               containerStyle={{ borderBottomWidth: 0 }}
             />
           )}
-          // keyExtractor={item => item["-LF3W-hkn3LOy-OetTEr"]["adress"]}
-         // убрать для отображения рамки снизу
-           ItemSeparatorComponent={this.renderSeparator}
+          keyExtractor={item => item.name}
+          // убрать для отображения рамки снизу
+          ItemSeparatorComponent={this.renderSeparator}
           ListHeaderComponent={this.renderHeader}
           ListFooterComponent={this.renderFooter}
           onRefresh={this.handleRefresh}
           refreshing={this.state.refreshing}
-          onEndReached={this.handleLoadMore}
-          onEndReachedThreshold={50}
+          //бесконечная прокрутка
+          // onEndReached={this.handleLoadMore}
+          // onEndThreshold={50}
 	//Левый свайп
 		//renderLeftHiddenRow={data =>
               //<Button full onPress={() => alert(data)}>
@@ -142,7 +153,7 @@ export default class TabCatalog extends Component {
               //</Button>}
 		//leftOpenValue={75}
         />
-      </List>
+     </List>
     );
   }
 }

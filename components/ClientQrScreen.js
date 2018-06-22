@@ -4,7 +4,7 @@ import {
   Image,
   ScrollView,
   Text,
-  FlatLis,
+  FlatList,
   ImageBackground,
   Alert,
   TouchableOpacity,

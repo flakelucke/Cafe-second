@@ -17,7 +17,8 @@ import { StackNavigator } from 'react-navigation';
 import LoginForm from './components/LoginForm.js';
 import RegistrationForm from './components/RegistrationForm.js';
 import ClientCard from './components/ClientCard.js';
-import ClientQrScreen from './components/ClientQrScreen.js';
+import TabCatalog from './components/Tabs/TabCatalog';
+// import ClientQrScreen from './components/ClientQrScreen.js';
 
 
 // const instructions = Platform.select({
@@ -32,9 +33,9 @@ export default class App extends Component {
     return (
       // <AppNavigator></AppNavigator>
       // <VerifyPhone></VerifyPhone>
-      //<ClientCard/>
-       // <TabCatalog/>
-       <ClientQrScreen/>
+      <ClientCard/>
+        //<TabCatalog/>
+       //<ClientQrScreen/>
     );
   }
 }

@@ -90,7 +90,6 @@ export default class ScreenAction extends Component {
       <FlatList
            data={this.state.articles}
            renderItem={({item}) =>
-
             <View style = {{ flex :1, flexDirection: 'column', padding : 8,}}>
                 <View style = {{  flexDirection: 'row',}}>
 

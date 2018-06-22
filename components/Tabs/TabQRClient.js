@@ -31,29 +31,22 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import Button from 'react-native-button';
 import 'react';
 import PropTypes from 'prop-types';
-import Barcode from 'react-native-barcode-builder';
+// import Barcode from 'react-native-barcode-builder';
+import QRCode from 'react-native-qrcode';
 import * as firebase from 'firebase';
 
 export default class TabQRClient extends Component {
 
   static navigationOptions = {
-    title: 'Карта клиента' ,
-    headerStyle: { height: 64 },
-    headerTintColor: '#FFDC26',
-    headerTitleStyle: {
-      color: 'black',
-      marginLeft: '20%',
-      paddingRight: 10,
-  },
+    header: null,
 }
 
 	constructor(props) {
 		super(props);
 		this.state = {
-		  qr : 'shops123456',
-		  balls: '35',
-		  friends: '5',
-		  active: 'true',
+      text: 'http://facebook.github.io/react-native/',
+      active: 'true',
+      qr: "123456789",
 		}
 	  }
 	  
@@ -82,7 +75,11 @@ export default class TabQRClient extends Component {
               </View>
 
               <View style = { styles.cardBarcode}>
-                <Barcode value={this.state.qr} format="CODE128"/>
+              <QRCode
+                value={this.state.text}
+                size={150}
+                bgColor='black'
+                fgColor='white'/>
               </View>
 
               <View style ={{flex :1, alignItems: 'center', justifyContent: 'center',}}>
@@ -122,7 +119,10 @@ textID : {
 
 cardBarcode :{
   padding : 10,
-  margin : 20,
+  marginRight: 87,
+  marginLeft: 100,
+  marginTop: 20,
+  marginBottom: 20,
   borderRadius:8,
   borderWidth:1,
   borderColor: "#FFF",
